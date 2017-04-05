@@ -1,0 +1,5 @@
+require 'psbot/version'
+require 'psbot/utilities/kernel'
+require 'psbot/utilities/deprecation'
+require 'psbot/utilities/encoding'
+require 'psbot/bot'
