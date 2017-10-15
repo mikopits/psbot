@@ -117,6 +117,8 @@ module PSBot
       case msg.command.downcase
       when ":"
         @login_time = msg.timestamp
+      when "updateuser"
+        events << [:connect] if msg.params[1] == "1"
       when "c"
         events << [:message] if msg.params.first != "~"
       end

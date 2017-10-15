@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 require "set"
 require "psbot/target"
 
@@ -6,6 +6,10 @@ module PSBot
   # This class represents a room, and includes methods to interact
   # with the room.
   class Room < Target
+    include PSBot::Helpers
+
+    # This is included to avoid the spamming of +PSBot::Utilities::Deprecation+.
+    include PSBot::Utilities
 
     # @return [String]
     attr_reader :name
@@ -54,44 +58,63 @@ module PSBot
       @users[user]
     end
 
+    # Returns all of the users with the specified rank within
+    # the room.
+    #
+    # @param [String] group The target group
+    # @return [Array<User>, nil] All users with the target group
+    #   in the room. Returns +nil+ if the group doesn't exist.
+    def all_auth(group)
+      return nil unless AUTH_STRINGS.has_key? group
+      @users.select {|_, auth| auth == group}.keys
+    end
+
     # @return [Array<User>] All admins in the room
     def admins
-      @users.select {|user, auth| auth == "~"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#admins", 'Room#all_auth("~")')
+      all_auth("~")
     end
 
     # @return [Array<User>] All owners in the room
     def owners
-      @users.select {|user, auth| auth == "#"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#owners", 'Room#all_auth("#")')
+      all_auth("#")
     end
 
     # @return [Array<User>] All mods in the room
     def moderators
-      @users.select {|user, auth| auth == "@"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#moderators", 'Room#all_auth("@")')
+      all_auth("@")
     end
 
     # @return [Array<User>] All drivers in the room
     def drivers
-      @users.select {|user, auth| auth == "%"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#drivers", 'Room#all_auth("%")')
+      all_auth("%")
     end
 
     # @return [Array<User>] All voiced users in the room
     def voiced
-      @users.select {|user, auth| auth == "+"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#voiced", 'Room#all_auth("+")')
+      all_auth("+")
     end
 
     # @return [Array<User>] All unvoiced users in the room
     def unvoiced
-      @users.select {|user, auth| auth == " "}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#unvoiced", 'Room#all_auth(" ")')
+      all_auth(" ")
     end
 
     # @return [Array<User>] All muted users in the room
     def muted
-      @users.select {|user, auth| auth == "!"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#muted", 'Room#all_auth("!")')
+      all_auth("!")
     end
 
     # @return [Array<User>] All locked users in the room
     def locked
-      @users.select {|user, auth| auth == "‽"}.keys
+      Deprecation.print_deprecation("0.2.0", "Room#locked", 'Room#all_auth("‽")')
+      all_auth("‽")
     end
     # @endgroup
 
@@ -144,7 +167,7 @@ module PSBot
     # @param [String] level
     # @return [void]
     def set_modchat(level)
-      send "#{@name}|/modchat #{level}"
+      send "/modchat #{level}"
     end
 
     # Remove all users
@@ -157,7 +180,7 @@ module PSBot
 
     # Send a message to this room.
     def send(text)
-      super(text.to_s)
+      super("#{@name}|#{text.to_s}")
     end
 
     # @return [Fixnum]

@@ -1,0 +1,20 @@
+* PSBot 0.2.0, 15 October 2017
+  - Fix method typos found within lib/psbot/pattern.rb and lib/psbot/room_list.rb
+  - Consolidate PSBot::Room methods for getting room auth into +PSBot::Room#all_auth+.
+    Usage of the aforementioned methods will print a deprecation warning, and will
+    call the new method.
+  - Consolidate the base for messages in +PSBot::Room#send+ and +PSBot::User#send+
+    instead of +PSBot::Message#reply+. This allows users to write plugins utilising
+    the former methods without having to write `room.send("#{room.name}|#{text}")`,
+    which goes against the fact that the Room/User classes should handle how messages
+    are formatted.
+  - Remove a require statement to a nonexistent file from lib/psbot/bot.rb, probably
+    left over from the IRC bot -> PS! bot modification.
+  - Add the event +:connect+ to available events that triggers upon the receiving of
+    the second |updateuser| message, which is sent when the bot logs in to its given
+    username. This allows any written plugins to use Cinch's `listen_to :connect` hook,
+    which avoids any `listen_to :updateuser` hooks firing twice.
+  - Note that these are breaking changes.
+
+* PSBot 0.1.0, 5 April 2017
+  - First stable release of PSBot.

@@ -28,7 +28,7 @@ module PSBot
     # @param [String] nick Nick of a user
     # @return [User, nil]
     def find(nick)
-      sanitized_nick = santize(nick)
+      sanitized_nick = sanitize(nick)
 
       if sanitized_nick == @bot.id
         return @bot
