@@ -1,5 +1,5 @@
 * PSBot 0.2.0, 15 October 2017
-  - Fix method typos found within lib/psbot/pattern.rb and lib/psbot/room_list.rb
+  - Fix method typos found within lib/psbot/pattern.rb and lib/psbot/user_list.rb
   - Consolidate PSBot::Room methods for getting room auth into +PSBot::Room#all_auth+.
     Usage of the aforementioned methods will print a deprecation warning, and will
     call the new method.
@@ -18,3 +18,4 @@
 
 * PSBot 0.1.0, 5 April 2017
   - First stable release of PSBot.
+  
