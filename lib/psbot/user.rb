@@ -31,6 +31,11 @@ module PSBot
       @id = sanitize(name)
     end
 
+    # Send a message to this user.
+    def send(text)
+      super("|/pm #{@id}, #{text.to_s}")
+    end
+
     # @return [String]
     def to_s
       @name

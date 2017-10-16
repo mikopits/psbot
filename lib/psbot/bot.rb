@@ -36,7 +36,6 @@ require "psbot/user_list"
 require "psbot/plugin_list"
 
 require "psbot/timer"
-require "psbot/formatting"
 
 require "psbot/configuration"
 require "psbot/configuration/bot"

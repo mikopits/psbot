@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name           = 'psbot'
-  spec.version        = '0.1.0'
+  spec.version        = '0.2.0'
   spec.authors        = ['Eric Furugori']
   spec.email          = ['mikopits@gmail.com']
   spec.summary        = %q{Ruby chatbot for Pokemon Showdown}

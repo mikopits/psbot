@@ -277,23 +277,13 @@ module PSBot
       }.merge(options)
 
       @target = options[:target] if options[:target]
-      text = text.to_s
-
-      case @target
-      when @room
-        pre = "#{@room.name}|"
-        text = "#{options[:prefix_before] + @user.nick + options[:prefix_after]} #{text}" if options[:prefix]
-      when @user
-        pre = "|/pm #{@user.nick}, "
-        text = "#{options[:prefix_before] + @user.nick + options[:prefix_after]} #{text}" if options[:prefix]
-      when nil
-        pre = "|"
-      end
+ 
+      text = "#{options[:prefix_before] + @user.nick + options[:prefix_after]} #{text.to_s}" if options[:prefix]
 
       if options[:truncate]
-        msg = pre + text[0..@bot.config.server_queue_size-1]
+        msg = text[0..@bot.config.server_queue_size-1]
       else
-        msg = pre + text
+        msg = text
       end
       @target.send(msg)
     end

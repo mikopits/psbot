@@ -10,7 +10,7 @@ module PSBot
       when Regexp, NilClass
         return obj
       else
-        escaped = Regexp.excape(obj.to_s)
+        escaped = Regexp.escape(obj.to_s)
         case anchor
         when :start
           return Regexp.new("^" + escaped)
